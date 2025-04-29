@@ -1,9 +1,9 @@
 "use client";
 
-import { Button, Typography, Box } from '@mui/material';
-import { auth, provider } from '../firebase';
-import { signInWithPopup } from 'firebase/auth';
-import { useState } from 'react';
+import { Button, Typography, Box } from "@mui/material";
+import { auth, provider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+import { useState } from "react";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -11,6 +11,7 @@ export default function Home() {
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
+      // @ts-expect-error
       setUser(result.user);
     } catch (error) {
       console.error(error);
@@ -18,8 +19,17 @@ export default function Home() {
   };
 
   return (
-    <Box sx={{ height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       {user ? (
+        // @ts-expect-error
         <Typography variant="h5">Welcome {user.displayName}</Typography>
       ) : (
         <>
