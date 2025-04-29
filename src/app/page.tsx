@@ -2,7 +2,7 @@
 
 import { Button, Typography, Box } from "@mui/material";
 import { auth, provider } from "../firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithRedirect } from "firebase/auth";
 import { useState } from "react";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
 
   const signInWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithRedirect(auth, provider);
       // @ts-expect-error
       setUser(result.user);
     } catch (error) {
